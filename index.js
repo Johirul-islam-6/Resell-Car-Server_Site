@@ -48,6 +48,15 @@ async function run() {
             res.send(result);
         })
 
+        // Product car post
+        // all review parson add
+        app.post('/productAdd', async (req, res) => {
+            const review = req.body;
+            const result = await allCarCollection.insertOne(review);
+            res.send(result)
+        })
+
+
         // cetegories/:Id filter
         app.get('/cetegories/:id', async (req, res) => {
             const product = req.params.id;
@@ -56,6 +65,8 @@ async function run() {
             res.send(result);
 
         })
+
+
 
         //Booking Car Modal infromation
         app.post('/booking', async (req, res) => {
@@ -82,6 +93,13 @@ async function run() {
         app.get('/users', async (req, res) => {
             const query = {};
             const result = await AllUser.find(query).toArray();
+            res.send(result)
+        })
+        // seller emaill
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const result = await AllUser.findOne(query).toArray();
             res.send(result)
         })
 
