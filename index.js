@@ -40,6 +40,7 @@ async function run() {
         const allCarCollection = client.db('Car-Shop_Datas').collection('All-Products');
         const BookingCar = client.db('Car-Shop_Datas').collection('BookingCar');
         const AllUser = client.db('Car-Shop_Datas').collection('All-Users');
+        const adverticCollection = client.db('Car-Shop_Datas').collection('All-Advertic');
 
         // get all cetegories collctions
         app.get('/cetegories', async (req, res) => {
@@ -66,12 +67,36 @@ async function run() {
 
         })
 
-
+        // all cullection
+        app.get('/allProduct', async (req, res) => {
+            const query = {};
+            const result = await allCarCollection.find(query).toArray();
+            res.send(result)
+        })
+        app.get('/allProduct/:email', async (req, res) => {
+            const user = req.params.email
+            const query = { email: user };
+            const result = await allCarCollection.find(query).toArray();
+            res.send(result)
+        })
 
         //Booking Car Modal infromation
         app.post('/booking', async (req, res) => {
             const boking = req.body;
             const result = await BookingCar.insertOne(boking);
+            res.send(result);
+        })
+        //Advatice Car Modal infromation
+        app.post('/advertic', async (req, res) => {
+            const boking = req.body;
+            const result = await adverticCollection.insertOne(boking);
+            res.send(result);
+        })
+        //Booking resive on email user 
+        app.get('/advertic/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const result = await adverticCollection.find(query).toArray();
             res.send(result);
         })
         //Booking resive on email user 
@@ -98,8 +123,9 @@ async function run() {
         // seller emaill
         app.get('/users/:email', async (req, res) => {
             const email = req.params.email;
+            // console.log(email);
             const query = { email: email };
-            const result = await AllUser.findOne(query).toArray();
+            const result = await AllUser.find(query).toArray();
             res.send(result)
         })
 
