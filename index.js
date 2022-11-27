@@ -106,8 +106,13 @@ async function run() {
             const result = await BookingCar.find(query).toArray();
             res.send(result);
         })
+        app.get('/bookings', async (req, res) => {
+            const query = {};
+            const result = await BookingCar.find(query).toArray();
+            res.send(result);
+        })
 
-        //Admin panel users
+        //Admin panel usersss
         app.post('/users', async (req, res) => {
             const users = req.body;
             const result = await AllUser.insertOne(users);
