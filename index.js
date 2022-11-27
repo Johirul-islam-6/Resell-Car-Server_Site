@@ -86,7 +86,7 @@ async function run() {
             const result = await BookingCar.insertOne(boking);
             res.send(result);
         })
-        //Advatice Car Modal infromation
+        //Advatice Car Modal infromations
         app.post('/advertic', async (req, res) => {
             const boking = req.body;
             const result = await adverticCollection.insertOne(boking);
@@ -114,7 +114,7 @@ async function run() {
             res.send(result);
         })
 
-        // all user 
+        // all user  information mongodb add
         app.get('/users', async (req, res) => {
             const query = {};
             const result = await AllUser.find(query).toArray();
@@ -154,6 +154,6 @@ run().catch(error => console.log(error))
 
 
 app.get('/', (req, res) => {
-    res.send('Cars Resell.shop is Runing')
+    res.send('Cars Resell.shop is Runings')
 })
-app.listen(port, () => console.log(`Cars Resell.shop is Runing ${port}`))
+app.listen(port, () => console.log(`Cars Resell.shop is Runing is ${port}`))
